@@ -31,6 +31,8 @@ puts "    \\/__/         \\/__/         \\/__/         \\/__/                   
     puts "----------------------------------------------------------------------------"                                                                   
     puts "Welcome to GameFinder!  This application allows users to find a great game!"
     puts "----------------------------------------------------------------------------"
+    puts "Hit enter to continue"
+    input = gets.chomp
                                                                              
                                                                                
 end
@@ -38,11 +40,12 @@ end
 def choices
   puts "Pick one from the following options"
   puts "------------------------------------"
-  puts "1. Find a genre of a game"
-  puts "2. Write a review for a game"
-  puts "3. Read reviews for a game"
-  puts "4. Update a review"
-  puts "5. Remove a review"
+  puts "1. Create a profile"
+  puts "2. Find a genre of a game"
+  puts "3. Write a review for a game"
+  puts "4. Read reviews for a game"
+  puts "5. Update a review"
+  puts "6. Remove a review"
   puts "------------------------------------"
 end
 
@@ -60,6 +63,25 @@ def closing
     puts "-------------------------------"
 end
 
+def create_player
+  puts "Please enter your name"
+  puts "------------------------------------------------"
+  name_input = gets.chomp
+  puts "Please enter your age"
+  puts "------------------------------------------------"
+  age_input = gets.chomp
+  puts "Please enter your favorite genre"
+  puts "------------------------------------------------"
+  puts "Examples - RPG, Action, MOBA, Simulation, Sports"
+  puts "------------------------------------------------"
+  genre_input = gets.chomp
+  p = Player.create(name: name_input, age: age_input, favorite_genre: genre_input)
+  puts "Your profile has been created"
+  puts "Name - #{name_input}"
+  puts "Age  - #{age_input}"
+  puts "Favorite Genre - #{genre_input}"
+end
+
 def find_genre_by_game
   puts "Let's find a genre of a game!"
   puts "Please enter the name of the game"
@@ -71,5 +93,11 @@ def find_genre_by_game
   puts "----------------------------------"
 end
 
+def write_review
+  puts "Please enter the name of the game"
+  game_name_input = gets.chomp
+  
+  puts "Please enter the score you give the game from 0 to 10"
 
+end
 
