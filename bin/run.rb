@@ -8,8 +8,8 @@ cli.choices
 #cli.read_review
 #cli.update_review
 #cli.list_all_game_names
-cli.remove_review
-cli.closing
+#cli.remove_review
+# cli.closing
 
 # intro
 # choices
