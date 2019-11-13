@@ -3,8 +3,9 @@ require_relative '../config/environment'
 cli = CommandLineInterface.new
 cli.intro
 cli.choices
-#cli.test_method
-cli.write_review
+#cli.find_favorite_genre_of_player
+#cli.write_review
+cli.read_reviews
 cli.closing
 
 # intro

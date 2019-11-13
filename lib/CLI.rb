@@ -47,6 +47,7 @@
     puts "4. Read reviews for a game"
     puts "5. Update a review"
     puts "6. Remove a review"
+    puts "7. Find favorite genre of a player"
     puts "------------------------------------"
   end
 
@@ -102,15 +103,15 @@
 
 
   def find_player
-    puts "Please enter your name"
+    puts "Please enter name"
     player_name_input = gets.chomp
     @player = Player.find_by(name: player_name_input)
   end
 
-  # def test_method
-  #     find_player
-  #     puts @player.favorite_genre
-  # end
+  def find_favorite_genre_of_player
+      find_player
+      puts @player.favorite_genre
+  end
 
   def write_review
     find_player
@@ -125,7 +126,16 @@
     Review.create(player_id: @player.id, game_id: @game.id, score: score_input, description: desc_input)
   end
 
-  
+  def read_reviews
+    find_game_by_name
+
+    review = Review.find_by(game_id: @game.id)
+    puts "Score #{review.score} out of 10"
+    puts "#{review.description}"
+    
+  end
+
+
 
 
 
