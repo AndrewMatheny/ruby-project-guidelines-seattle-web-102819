@@ -48,6 +48,7 @@
     puts "5. Update a review"
     puts "6. Remove a review"
     puts "7. Find favorite genre of a player"
+    puts "8. Lists all games in the database"
     puts "------------------------------------"
   end
 
@@ -151,6 +152,23 @@
     found_review.save
     puts found_review
 
+  end
+
+  def list_all_game_names
+    all_games = Game.all
+    all_games.each do |game|
+      puts game.name
+    end
+  end
+
+  def remove_review
+    find_player
+    find_game_by_name
+
+    review_to_remove = Review.find_by(player_id: @player.id, game_id: @game.id)
+
+    review_to_remove.destroy
+    puts "The review has been deleted"
   end
 
   
