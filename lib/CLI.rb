@@ -1,5 +1,6 @@
 def intro
     puts "Welcome to GameFinder!  This application allows users to find a great game based on their interests!"
+    puts "----------------------------------------------------------------------------------------------------"
 end
 
 def closing
