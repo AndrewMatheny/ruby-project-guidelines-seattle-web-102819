@@ -1,4 +1,5 @@
 def intro
+<<<<<<< HEAD
     # puts "______________________________________________________________________________"
     # puts " ______ _______ _______ _______ _______ _____ __   _ ______  _______  ______"
     # puts " |  ____ |_____| |  |  | |______ |______   |   | \\  | |     \\ |______ |_____/"
@@ -44,6 +45,10 @@ def choices
   puts "4. Update a review"
   puts "5. Remove a review"
   puts "------------------------------------"
+=======
+    puts "Welcome to GameFinder!  This application allows users to find a great game based on their interests!"
+    puts "----------------------------------------------------------------------------------------------------"
+>>>>>>> master
 end
 
 def closing
