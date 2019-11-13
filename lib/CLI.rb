@@ -132,9 +132,10 @@
     review = Review.find_by(game_id: @game.id)
     puts "Score #{review.score} out of 10"
     puts "#{review.description}"
-    
+
   end
 
+  #test
 
 
 
