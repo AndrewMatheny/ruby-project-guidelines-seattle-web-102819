@@ -1,5 +1,6 @@
  class CommandLineInterface 
   def intro
+    new_screen(20)
       # puts "______________________________________________________________________________"
       # puts " ______ _______ _______ _______ _______ _____ __   _ ______  _______  ______"
       # puts " |  ____ |_____| |  |  | |______ |______   |   | \\  | |     \\ |______ |_____/"
@@ -32,13 +33,25 @@
       puts "----------------------------------------------------------------------------"                                                                   
       puts "Welcome to GameFinder!  This application allows users to find a great game!"
       puts "----------------------------------------------------------------------------"
+
+
+      new_screen(30)     
       puts "Hit enter to continue"
       input = gets.chomp
+
+
                                                                               
                                                                                 
   end
 
+  def new_screen(spaces)
+    spaces.times do
+      puts ""
+    end
+  end
+
   def choices
+    new_screen(43)
     puts "Pick one from the following options"
     puts "------------------------------------"
     puts "1. Create a profile"
@@ -53,6 +66,7 @@
     puts "If you would like to exit the program type \'exit\' or \'quit\'"
     puts "------------------------------------"
       while true
+        new_screen(5)
         input = gets.chomp
         if input == '1'
           create_player
@@ -106,6 +120,7 @@
   def create_player
 
     while true
+      new_screen(20)
       puts "Please enter your name"
       puts "------------------------------------------------"
       name_input = gets.chomp
@@ -135,10 +150,15 @@
       puts "Please enter the name of the game"
       puts "----------------------------------"
       game_input = gets.chomp
-      a = Game.find_by!(name: game_input)
-      puts "----------------------------------"
-      puts "#{a.name} - #{a.genre}"
-      puts "----------------------------------"
+      a = Game.find_by(name: game_input)
+      if a == nil
+        puts "No game found in database by that name"
+        break
+      else
+        puts "----------------------------------"
+        puts "#{a.name} - #{a.genre}"
+        puts "----------------------------------"
+      end
 
       break
     end
@@ -149,6 +169,13 @@
     puts "Please enter name of game"
     name_of_game_input = gets.chomp
     @game = Game.find_by(name: name_of_game_input)
+    # if @game == true
+    #   break
+    # else
+    #   puts "Game not found by that name!"
+    #   break
+    #   options
+    # end
   end
 
 
