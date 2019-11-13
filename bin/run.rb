@@ -5,7 +5,8 @@ cli.intro
 cli.choices
 #cli.find_favorite_genre_of_player
 #cli.write_review
-cli.read_reviews
+#cli.read_review
+cli.update_review
 cli.closing
 
 # intro

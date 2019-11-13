@@ -126,7 +126,7 @@
     Review.create(player_id: @player.id, game_id: @game.id, score: score_input, description: desc_input)
   end
 
-  def read_reviews
+  def read_review
     find_game_by_name
 
     review = Review.find_by(game_id: @game.id)
@@ -135,7 +135,25 @@
 
   end
 
+  def update_review
+    find_player
+    find_game_by_name
 
+    found_review = Review.find_by(player_id: @player.id, game_id: @game.id)
+
+    puts "Please enter a new score"
+    new_score_input = gets.chomp
+    puts "Please enter a new review description"
+    new_disc_input = gets.chomp
+
+    found_review.score = new_score_input
+    found_review.description = new_disc_input
+    found_review.save
+    puts found_review
+
+  end
+
+  
 
 
 end
