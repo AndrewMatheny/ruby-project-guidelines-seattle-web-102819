@@ -172,34 +172,57 @@
   end
 
   def find_game_by_name
+    #while true
     puts "#========================#"
     puts "Please enter name of game"
     puts "#========================#"
     name_of_game_input = gets.chomp
     @game = Game.find_by(name: name_of_game_input)
-    # if @game == true
+    #   if @game == nil
+    #     new_screen(64)
+    #     puts "#==========================================#"
+    #     puts "**No game found in database by that name!**"
+    #     puts "#==========================================#"
+    #     new_screen(20)
+    #     break
+    #   end
     #   break
-    # else
-    #   puts "Game not found by that name!"
-    #   break
-    #   options
     # end
+    
+    # choices
   end
 
 
-  def find_player
-    puts "#=====================#"
-    puts "Please enter of player"
-    puts "#=====================#"
-    player_name_input = gets.chomp
-    @player = Player.find_by(name: player_name_input)
+  # def find_player
+  #   puts "#=====================#"
+  #   puts "Please enter of player"
+  #   puts "#=====================#"
+  #   player_name_input = gets.chomp
+  #   @player = Player.find_by(name: player_name_input)
+  # end
+
+  def find_player(name)
+    @player = Player.find_by(name: name)
   end
 
   #3
   def write_review
     while true
       new_screen(64)
-      find_player
+    puts "#=====================#"
+    puts "Please enter of player"
+    puts "#=====================#"
+      name_input = gets.chomp
+      find_player(name_input)
+      if @player == nil
+        new_screen(64)
+        puts "#==========================================#"
+        puts "**No player found in database by that name!**"
+        puts "#==========================================#"
+        new_screen(20)
+        choices
+        break
+      end
       find_game_by_name
       
       puts "#=====================================================#"
