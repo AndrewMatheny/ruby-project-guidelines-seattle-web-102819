@@ -36,7 +36,7 @@
 
       # #boom = Music.new('Star_Way.wav')
       # boom.play
-      new_screen(30)     
+      new_screen(28)     
       puts "Hit enter to continue"
       input = gets.chomp
       # boom.stop
@@ -52,7 +52,7 @@
   end
 
   def choices
-    new_screen(43)
+    #new_screen(43)
     puts "Pick one from the following options"
     puts "------------------------------------"
     puts "1. Create a profile"
@@ -104,24 +104,10 @@
       end
   end
 
-  # def closing
-  #     while true
-  #         puts "If you would like to exit the program type \'exit\' or \'quit\'"
-  #         input = gets.chomp.downcase
-  #         #puts input 
-  #         if input == 'exit' || input == 'quit'
-  #           break 
-  #         end
-  #       end
-  #     puts "-------------------------------"
-  #     puts 'Thank you for using GameFinder!'
-  #     puts "-------------------------------"
-  # end
-
   def create_player
 
     while true
-      new_screen(20)
+      new_screen(64)
       puts "Please enter your name"
       puts "------------------------------------------------"
       name_input = gets.chomp
@@ -135,10 +121,12 @@
       puts "------------------------------------------------"
       genre_input = gets.chomp
       p = Player.create(name: name_input, age: age_input, favorite_genre: genre_input)
+      new_screen(20)
       puts "Your profile has been created"
       puts "Name - #{name_input}"
       puts "Age  - #{age_input}"
       puts "Favorite Genre - #{genre_input}"
+      new_screen(20)
 
       choices
       break
@@ -147,18 +135,23 @@
 
   def find_genre_by_game
     while true
+      new_screen(64)
       puts "Let's find a genre of a game!"
       puts "Please enter the name of the game"
       puts "----------------------------------"
       game_input = gets.chomp
       a = Game.find_by(name: game_input)
       if a == nil
-        puts "No game found in database by that name"
+        new_screen(23)
+        puts "***No game found in database by that name***"
+        new_screen(20)
         break
       else
+        new_screen(21)
         puts "----------------------------------"
         puts "#{a.name} - #{a.genre}"
         puts "----------------------------------"
+        new_screen(20)
       end
 
       break
@@ -181,7 +174,7 @@
 
 
   def find_player
-    puts "Please enter name"
+    puts "Please enter of player"
     player_name_input = gets.chomp
     @player = Player.find_by(name: player_name_input)
   end
@@ -189,7 +182,9 @@
   def find_favorite_genre_of_player
     while true
       find_player
-      puts @player.favorite_genre
+      new_screen(64)
+      puts "The favorite game genre of #{@player.name} is #{@player.favorite_genre}."
+      new_screen(20)
 
       break
     end
@@ -198,19 +193,29 @@
 
   def write_review
     while true
+      new_screen(64)
       find_player
       find_game_by_name
       
       puts "Please enter the score you give the game from 0 to 10"
       score_input = gets.chomp
 
-      puts "Please enter your review description"
-      desc_input = gets.chomp
+      # if score_input == "exit" || score_input == "quit"
+      #   choices
+      #   break
+      # else
+      
+        puts "Please enter your review description"
+        desc_input = gets.chomp
 
-      Review.create(player_id: @player.id, game_id: @game.id, score: score_input, description: desc_input)
+        Review.create(player_id: @player.id, game_id: @game.id, score: score_input, description: desc_input)
 
+      new_screen(64)
+      puts "Review created!"
+      new_screen(20)
       choices
       break
+    
     end
   end
 
@@ -219,8 +224,11 @@
       find_game_by_name
 
       review = Review.find_by(game_id: @game.id)
+      # review = Review.find(game_id: @game.id)
+      new_screen(64)
       puts "Score #{review.score} out of 10"
       puts "#{review.description}"
+      new_screen(20)
 
       break
     end
@@ -230,6 +238,7 @@
 
   def update_review
     while true
+      new_screen(64)
       find_player
       find_game_by_name
 
@@ -243,7 +252,12 @@
       found_review.score = new_score_input
       found_review.description = new_disc_input
       found_review.save
-      puts found_review
+      new_screen(64)
+      puts "Your score #{found_review.score} out of 10"
+      puts ""
+      puts "Your review description :"
+      puts "#{found_review.description}"
+      new_screen(20)
 
       choices
       break
@@ -253,10 +267,15 @@
 
   def list_all_game_names
     while true
+      new_screen(25)
+      puts "---------------------"
       all_games = Game.all
       all_games.each do |game|
         puts game.name
       end
+
+      puts "---------------------"
+      new_screen(10)
 
       choices
       break
@@ -265,19 +284,35 @@
 
   def remove_review
     while true
+      new_screen(64)
       find_player
       find_game_by_name
 
       review_to_remove = Review.find_by(player_id: @player.id, game_id: @game.id)
 
       review_to_remove.destroy
+      new_screen(64)
       puts "The review has been deleted"
+      new_screen(20)
 
 
       break
     end
     choices
   end
+
+  # def closing
+  #   new_screen(20)
+  #   puts "Created by Drew Matheny"
+  #   puts "Produced by Drew Matheny"
+  #   new_screen(10)
+  #   sleep 5
+  #   puts "Writing by Drew Matheny"
+  # end
+
+  #     puts "-------------------------------"
+  #     puts 'Thank you for using GameFinder!'
+  #     puts "-------------------------------"
 
 
 
