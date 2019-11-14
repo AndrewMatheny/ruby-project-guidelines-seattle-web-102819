@@ -1,9 +1,14 @@
 require_relative '../config/environment'
 
 cli = CommandLineInterface.new
+# boom = Sound.new('Star_Way.wav')
+# boom.play
 boom = Sound.new('Star_Way.wav')
 boom.play
+
+
 cli.intro
+
 
 
 # Play the sound

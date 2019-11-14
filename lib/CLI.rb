@@ -34,11 +34,12 @@
       puts "Welcome to GameFinder!  This application allows users to find a great game!"
       puts "----------------------------------------------------------------------------"
 
-
+      # #boom = Music.new('Star_Way.wav')
+      # boom.play
       new_screen(30)     
       puts "Hit enter to continue"
       input = gets.chomp
-
+      # boom.stop
 
                                                                               
                                                                                 
