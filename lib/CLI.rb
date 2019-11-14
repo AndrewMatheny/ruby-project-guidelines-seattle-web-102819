@@ -63,6 +63,7 @@
     puts "6. Remove a review"
     puts "7. Find favorite genre of a player"
     puts "8. Lists all games in the database"
+    puts "9. Add game to database"
     puts "------------------------------------"
     puts "If you would like to exit the program type \'exit\' or \'quit\'"
     puts "------------------------------------"
@@ -93,17 +94,23 @@
         elsif input =='8'
           list_all_game_names
           break
+        elsif input =='9'
+          add_game
+          break
         elsif input.downcase == 'exit' || input.downcase == 'quit'
           break
           puts "-------------------------------"
           puts 'Thank you for using GameFinder!'
           puts "-------------------------------"
         else
+          puts "#=================================================================#"
           puts "Command not found - Please pick from the list or type exit to quit"
+          puts "#=================================================================#"
         end
       end
   end
 
+  #1
   def create_player
 
     while true
@@ -122,10 +129,12 @@
       genre_input = gets.chomp
       p = Player.create(name: name_input, age: age_input, favorite_genre: genre_input)
       new_screen(20)
+      puts "#====================================#"
       puts "Your profile has been created"
       puts "Name - #{name_input}"
       puts "Age  - #{age_input}"
       puts "Favorite Genre - #{genre_input}"
+      puts "#====================================#"
       new_screen(20)
 
       choices
@@ -133,6 +142,7 @@
     end
   end
 
+#2
   def find_genre_by_game
     while true
       new_screen(64)
@@ -143,14 +153,16 @@
       a = Game.find_by(name: game_input)
       if a == nil
         new_screen(23)
+        puts "#==========================================#"
         puts "***No game found in database by that name***"
+        puts "#==========================================#"
         new_screen(20)
         break
       else
         new_screen(21)
-        puts "----------------------------------"
+        puts "#==========================================#"
         puts "#{a.name} - #{a.genre}"
-        puts "----------------------------------"
+        puts "#==========================================#"
         new_screen(20)
       end
 
@@ -160,7 +172,9 @@
   end
 
   def find_game_by_name
+    puts "#========================#"
     puts "Please enter name of game"
+    puts "#========================#"
     name_of_game_input = gets.chomp
     @game = Game.find_by(name: name_of_game_input)
     # if @game == true
@@ -174,44 +188,40 @@
 
 
   def find_player
+    puts "#=====================#"
     puts "Please enter of player"
+    puts "#=====================#"
     player_name_input = gets.chomp
     @player = Player.find_by(name: player_name_input)
   end
 
-  def find_favorite_genre_of_player
-    while true
-      find_player
-      new_screen(64)
-      puts "The favorite game genre of #{@player.name} is #{@player.favorite_genre}."
-      new_screen(20)
-
-      break
-    end
-    choices
-  end
-
+  #3
   def write_review
     while true
       new_screen(64)
       find_player
       find_game_by_name
       
+      puts "#=====================================================#"
       puts "Please enter the score you give the game from 0 to 10"
+      puts "#=====================================================#"
       score_input = gets.chomp
 
       # if score_input == "exit" || score_input == "quit"
       #   choices
       #   break
       # else
-      
+        puts "#====================================#"
         puts "Please enter your review description"
+        puts "#====================================#"
         desc_input = gets.chomp
 
         Review.create(player_id: @player.id, game_id: @game.id, score: score_input, description: desc_input)
 
       new_screen(64)
+      puts "#==============#"
       puts "Review created!"
+      puts "#==============#"
       new_screen(20)
       choices
       break
@@ -219,23 +229,36 @@
     end
   end
 
+  #4
   def read_review
     while true
       find_game_by_name
 
-      review = Review.find_by(game_id: @game.id)
-      # review = Review.find(game_id: @game.id)
       new_screen(64)
-      puts "Score #{review.score} out of 10"
-      puts "#{review.description}"
-      new_screen(20)
 
+      #review = Review.find_by(game_id: @game.id)
+      review = Review.where(game_id: @game.id)
+      #player_name = Player.find_by(name: 'Drew')
+      review.each do |r|
+        # review = Review.find(game_id: @game.id)
+        #new_screen(64)
+        #puts "Review by #{player_name}"
+        puts "#========================#"
+        puts "Score #{r.score} out of 10"
+        puts "#{r.description}"
+        puts "#========================#"
+        new_screen(5)
+      
+        #new_screen(20)
+      end
+      new_screen(10)
       break
     end
     choices
 
   end
 
+  #5
   def update_review
     while true
       new_screen(64)
@@ -247,16 +270,18 @@
       puts "Please enter a new score"
       new_score_input = gets.chomp
       puts "Please enter a new review description"
-      new_disc_input = gets.chomp
+      new_desc_input = gets.chomp
 
       found_review.score = new_score_input
-      found_review.description = new_disc_input
+      found_review.description = new_desc_input
       found_review.save
       new_screen(64)
+      puts "#==================================#"
       puts "Your score #{found_review.score} out of 10"
       puts ""
       puts "Your review description :"
       puts "#{found_review.description}"
+      puts "#==================================#"
       new_screen(20)
 
       choices
@@ -265,23 +290,8 @@
 
   end
 
-  def list_all_game_names
-    while true
-      new_screen(25)
-      puts "---------------------"
-      all_games = Game.all
-      all_games.each do |game|
-        puts game.name
-      end
 
-      puts "---------------------"
-      new_screen(10)
-
-      choices
-      break
-    end
-  end
-
+#6
   def remove_review
     while true
       new_screen(64)
@@ -292,7 +302,9 @@
 
       review_to_remove.destroy
       new_screen(64)
+      puts "#==========================#"
       puts "The review has been deleted"
+      puts "#==========================#"
       new_screen(20)
 
 
@@ -301,19 +313,74 @@
     choices
   end
 
-   def closing
-  #   new_screen(20)
-  #   puts "Created by Drew Matheny"
-  #   puts "Produced by Drew Matheny"
-  #   new_screen(10)
-  #   sleep 5
-  #   puts "Writing by Drew Matheny"
-  # end
+#7
+  def find_favorite_genre_of_player
+    while true
+      find_player
+      new_screen(64)
+      puts "#=======================================#"
+      puts "The favorite game genre of #{@player.name} is #{@player.favorite_genre}."
+      puts "#=======================================#"
+      new_screen(20)
 
+      break
+    end
+    choices
+  end
+
+#8
+  def list_all_game_names
+    while true
+      new_screen(25)
+      puts "#=============================#"
+      all_games = Game.all
+      all_games.each do |game|
+        puts game.name
+      end
+
+      puts "#=============================#"
+      new_screen(10)
+
+      choices
+      break
+    end
+  end
+
+  #9
+  def add_game
+
+    while true
+      new_screen(64)
+      puts "Please enter the name of the game"
+      puts "------------------------------------------------"
+      game_name_input = gets.chomp
+
+      puts "Please enter the game's genre"
+      puts "------------------------------------------------"
+      puts "Examples - RPG, Action, MOBA, Simulation, Sports"
+      puts "------------------------------------------------"
+      game_genre_input = gets.chomp
+      g = Game.create(name: game_name_input, genre: game_genre_input)
+      new_screen(20)
+      puts "#====================================#"
+      puts "The game has been added to the database"
+      puts "Game Name - #{game_name_input}"
+      puts "Game Genre - #{game_genre_input}"
+      puts "#====================================#"
+      new_screen(20)
+
+      choices
+      break
+    end
+  end
+
+   def closing
+
+    #If you re-add the commented lines below in the closing methods the star wars theme title crawl theme will play and the credits will scroll.
     new_screen(64)
 
-    closing = Music.new('Star_Wars_Theme.wav')
-    closing.play
+    # closing = Music.new('Star_Wars_Theme.wav')
+    # closing.play
 
     puts "---------------------------------"
     puts "Thank you for using GameFinder!"
@@ -338,14 +405,8 @@
     puts "      \\/___/   \\/_/  \\/____/  \\/__//__/                \\/_/ \\/_/ \\/__/\\/_/    \\/__/    \\/_/\\/_/ \\/____/ \\/_/\\/_/  `/___/> \\"
     puts "                                                                                                                     /\\___/"
     puts "                                                                                                                     \\/__/ "
-
-    # sleep 0.5
-    # new_screen(1)
     
-    scrolling(64)
-  #     puts "-------------------------------"
-  #     puts 'Thank you for using GameFinder!'
-  #     puts "-------------------------------"
+   # scrolling(64)
 
    end
 
