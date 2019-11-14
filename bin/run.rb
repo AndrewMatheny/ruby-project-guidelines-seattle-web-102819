@@ -13,6 +13,7 @@ cli.intro
 # Play the sound
 
 cli.choices
+cli.closing
 # cli.closing
 #cli.find_favorite_genre_of_player
 #cli.write_review
