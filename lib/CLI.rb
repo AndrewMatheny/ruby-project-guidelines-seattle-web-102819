@@ -36,7 +36,7 @@
 
       # #boom = Music.new('Star_Way.wav')
       # boom.play
-      new_screen(28)     
+      new_screen(27)     
       puts "Hit enter to continue"
       input = gets.chomp
       # boom.stop
@@ -187,7 +187,7 @@
       new_screen(64)
 
       puts "#=====================#"
-      puts "Please enter of player"
+      puts "Please enter name of player"
       puts "#=====================#"
 
       name_input = gets.chomp
