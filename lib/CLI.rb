@@ -36,7 +36,7 @@
 
       # #boom = Music.new('Star_Way.wav')
       # boom.play
-      new_screen(28)     
+      new_screen(27)     
       puts "Hit enter to continue"
       input = gets.chomp
       # boom.stop
@@ -171,36 +171,52 @@
     choices
   end
 
-  def find_game_by_name
-    puts "#========================#"
-    puts "Please enter name of game"
-    puts "#========================#"
-    name_of_game_input = gets.chomp
-    @game = Game.find_by(name: name_of_game_input)
-    # if @game == true
-    #   break
-    # else
-    #   puts "Game not found by that name!"
-    #   break
-    #   options
-    # end
+  
+  def find_game_by_name(game_name)
+    @game = Game.find_by(name: game_name)
   end
 
 
-  def find_player
-    puts "#=====================#"
-    puts "Please enter of player"
-    puts "#=====================#"
-    player_name_input = gets.chomp
-    @player = Player.find_by(name: player_name_input)
+  def find_player(name)
+    @player = Player.find_by(name: name)
   end
 
   #3
   def write_review
     while true
       new_screen(64)
-      find_player
-      find_game_by_name
+
+      puts "#=====================#"
+      puts "Please enter name of player"
+      puts "#=====================#"
+
+      name_input = gets.chomp
+      find_player(name_input)
+      if @player == nil
+        new_screen(64)
+        puts "#==========================================#"
+        puts "**No player found in database by that name!**"
+        puts "#==========================================#"
+        new_screen(20)
+        choices
+        break
+      end
+
+      puts "#========================#"
+      puts "Please enter name of game"
+      puts "#========================#"
+
+      game_input = gets.chomp
+      find_game_by_name(game_input)
+      if @game == nil
+        new_screen(64)
+        puts "#==========================================#"
+        puts "**No game found in database by that name!**"
+        puts "#==========================================#"
+        new_screen(20)
+        choices
+        break
+      end
       
       puts "#=====================================================#"
       puts "Please enter the score you give the game from 0 to 10"
@@ -232,38 +248,77 @@
   #4
   def read_review
     while true
-      find_game_by_name
+
+      puts "#========================#"
+      puts "Please enter name of game"
+      puts "#========================#"
+
+      game_input = gets.chomp
+      find_game_by_name(game_input)
+      if @game == nil
+        new_screen(64)
+        puts "#==========================================#"
+        puts "**No game found in database by that name!**"
+        puts "#==========================================#"
+        new_screen(20)
+        choices
+        break
+      end
 
       new_screen(64)
 
-      #review = Review.find_by(game_id: @game.id)
       review = Review.where(game_id: @game.id)
-      #player_name = Player.find_by(name: 'Drew')
       review.each do |r|
-        # review = Review.find(game_id: @game.id)
-        #new_screen(64)
-        #puts "Review by #{player_name}"
+
         puts "#========================#"
         puts "Score #{r.score} out of 10"
         puts "#{r.description}"
         puts "#========================#"
         new_screen(5)
-      
-        #new_screen(20)
+
       end
       new_screen(10)
+      choices
       break
     end
-    choices
-
   end
 
   #5
   def update_review
     while true
       new_screen(64)
-      find_player
-      find_game_by_name
+
+      puts "#=====================#"
+      puts "Please enter of player"
+      puts "#=====================#"
+
+      name_input = gets.chomp
+      find_player(name_input)
+      if @player == nil
+        new_screen(64)
+        puts "#==========================================#"
+        puts "**No player found in database by that name!**"
+        puts "#==========================================#"
+        new_screen(20)
+        choices
+        break
+      end
+
+      puts "#========================#"
+      puts "Please enter name of game"
+      puts "#========================#"
+
+      game_input = gets.chomp
+      find_game_by_name(game_input)
+      if @game == nil
+        new_screen(64)
+        puts "#==========================================#"
+        puts "**No game found in database by that name!**"
+        puts "#==========================================#"
+        new_screen(20)
+        choices
+        break
+      end
 
       found_review = Review.find_by(player_id: @player.id, game_id: @game.id)
 
@@ -287,7 +342,6 @@
       choices
       break
     end
-
   end
 
 
@@ -295,8 +349,38 @@
   def remove_review
     while true
       new_screen(64)
-      find_player
-      find_game_by_name
+
+      puts "#=====================#"
+      puts "Please enter of player"
+      puts "#=====================#"
+
+      name_input = gets.chomp
+      find_player(name_input)
+      if @player == nil
+        new_screen(64)
+        puts "#==========================================#"
+        puts "**No player found in database by that name!**"
+        puts "#==========================================#"
+        new_screen(20)
+        choices
+        break
+      end
+
+      puts "#========================#"
+      puts "Please enter name of game"
+      puts "#========================#"
+
+      game_input = gets.chomp
+      find_game_by_name(game_input)
+      if @game == nil
+        new_screen(64)
+        puts "#==========================================#"
+        puts "**No game found in database by that name!**"
+        puts "#==========================================#"
+        new_screen(20)
+        choices
+        break
+      end
 
       review_to_remove = Review.find_by(player_id: @player.id, game_id: @game.id)
 
@@ -307,25 +391,40 @@
       puts "#==========================#"
       new_screen(20)
 
-
+      choices
       break
     end
-    choices
   end
 
 #7
   def find_favorite_genre_of_player
     while true
-      find_player
+
+      puts "#=====================#"
+      puts "Please enter of player"
+      puts "#=====================#"
+
+      name_input = gets.chomp
+      find_player(name_input)
+      if @player == nil
+        new_screen(64)
+        puts "#==========================================#"
+        puts "**No player found in database by that name!**"
+        puts "#==========================================#"
+        new_screen(20)
+        choices
+        break
+      end
+
       new_screen(64)
       puts "#=======================================#"
       puts "The favorite game genre of #{@player.name} is #{@player.favorite_genre}."
       puts "#=======================================#"
       new_screen(20)
 
+      choices
       break
     end
-    choices
   end
 
 #8
