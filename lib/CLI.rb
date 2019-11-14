@@ -312,6 +312,9 @@
 
     new_screen(64)
 
+    closing = Music.new('Star_Wars_Theme.wav')
+    closing.play
+
     puts "---------------------------------"
     puts "Thank you for using GameFinder!"
     puts "---------------------------------"
