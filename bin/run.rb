@@ -10,6 +10,6 @@ cli.intro
 
 
 cli.choices
-#cli.closing
+cli.closing
 
 
