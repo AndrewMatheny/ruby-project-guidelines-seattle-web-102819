@@ -171,41 +171,11 @@
     choices
   end
 
-  # def find_game_by_name
-  #   #while true
-  #   puts "#========================#"
-  #   puts "Please enter name of game"
-  #   puts "#========================#"
-  #   name_of_game_input = gets.chomp
-  #   @game = Game.find_by(name: name_of_game_input)
-  #   #   if @game == nil
-  #   #     new_screen(64)
-  #   #     puts "#==========================================#"
-  #   #     puts "**No game found in database by that name!**"
-  #   #     puts "#==========================================#"
-  #   #     new_screen(20)
-  #   #     break
-  #   #   end
-  #   #   break
-  #   # end
-    
-  #   # choices
-  # end
-
   
   def find_game_by_name(game_name)
     @game = Game.find_by(name: game_name)
   end
 
-
-
-  # def find_player
-  #   puts "#=====================#"
-  #   puts "Please enter of player"
-  #   puts "#=====================#"
-  #   player_name_input = gets.chomp
-  #   @player = Player.find_by(name: player_name_input)
-  # end
 
   def find_player(name)
     @player = Player.find_by(name: name)
@@ -297,35 +267,26 @@
 
       new_screen(64)
 
-      #review = Review.find_by(game_id: @game.id)
       review = Review.where(game_id: @game.id)
-      #player_name = Player.find_by(name: 'Drew')
       review.each do |r|
-        # review = Review.find(game_id: @game.id)
-        #new_screen(64)
-        #puts "Review by #{player_name}"
+
         puts "#========================#"
         puts "Score #{r.score} out of 10"
         puts "#{r.description}"
         puts "#========================#"
         new_screen(5)
-      
-        #new_screen(20)
+
       end
       new_screen(10)
       choices
       break
     end
-    #choices
-
   end
 
   #5
   def update_review
     while true
       new_screen(64)
-      # find_player
-      # find_game_by_name
 
       puts "#=====================#"
       puts "Please enter of player"
@@ -381,7 +342,6 @@
       choices
       break
     end
-
   end
 
 
@@ -389,8 +349,7 @@
   def remove_review
     while true
       new_screen(64)
-      # find_player
-      # find_game_by_name
+
       puts "#=====================#"
       puts "Please enter of player"
       puts "#=====================#"
@@ -435,7 +394,6 @@
       choices
       break
     end
-
   end
 
 #7
