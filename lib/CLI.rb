@@ -63,7 +63,8 @@
     puts "6. Remove a review"
     puts "7. Find favorite genre of a player"
     puts "8. Lists all games in the database"
-    puts "9. Add game to database"
+    puts "9. List all players in the database"
+    puts "10. Add a game to the database"
     puts "------------------------------------"
     puts "If you would like to exit the program type \'exit\' or \'quit\'"
     puts "------------------------------------"
@@ -91,10 +92,13 @@
         elsif input == '7'
           find_favorite_genre_of_player
           break
-        elsif input =='8'
+        elsif input == '8'
           list_all_game_names
           break
-        elsif input =='9'
+        elsif input == '9'
+          list_all_players
+          break        
+        elsif input == '10'
           add_game
           break
         elsif input.downcase == 'exit' || input.downcase == 'quit'
@@ -449,6 +453,24 @@
   end
 
   #9
+  def list_all_players
+    while true
+      new_screen(25)
+      puts "#=============================#"
+      all_players = Player.all
+      all_players.each do |player|
+        puts player.name
+      end
+
+      puts "#=============================#"
+      new_screen(10)
+
+      choices
+      break
+    end
+  end
+
+  #10
   def add_game
 
     while true
@@ -508,7 +530,7 @@
     puts "                                                                                                                     /\\___/"
     puts "                                                                                                                     \\/__/ "
     
-  #scrolling(64)
+  # scrolling(64)
 
    end
 

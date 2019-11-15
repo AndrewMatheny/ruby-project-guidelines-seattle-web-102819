@@ -8,7 +8,6 @@ class CreateTable < ActiveRecord::Migration[5.0]
         create_table :games do |game|
             game.string :name
             game.string :genre 
-            game.float :average_review
         end
         create_table :reviews do |review|
             review.integer :player_id
