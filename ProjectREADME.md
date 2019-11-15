@@ -11,5 +11,16 @@ The following methods are included
     6. Removing a review
     7. Finding a players favorite genre
     8. Listing all the games in the database
-    9. Adding a new game to the database
+    9. Listing all players in the database
+    10. Adding a new game to the database
+    11. Finding average review for a game
+
+*Acknowledgements*
+
+Sounds added using the Ruby2D gem
+
+I would like to thank Devin Kelly for coming up with the ultimate code space saver for putting empty spaces.
+I would also like to thank Michael Zamudio for constant help figuring out weird bug errors and general logic structure.
+
+
 
