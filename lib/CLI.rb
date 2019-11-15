@@ -452,7 +452,7 @@
     end
   end
 
-  #9
+#9
   def list_all_players
     while true
       new_screen(25)
@@ -470,7 +470,7 @@
     end
   end
 
-  #10
+#10
   def add_game
 
     while true
