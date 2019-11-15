@@ -508,7 +508,7 @@
     puts "                                                                                                                     /\\___/"
     puts "                                                                                                                     \\/__/ "
     
-  #  scrolling(64)
+  #scrolling(64)
 
    end
 
