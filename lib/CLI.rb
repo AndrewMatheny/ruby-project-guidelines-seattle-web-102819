@@ -65,6 +65,7 @@
     puts "8. Lists all games in the database"
     puts "9. List all players in the database"
     puts "10. Add a game to the database"
+    puts "11. Find average reviews for a game"
     puts "------------------------------------"
     puts "If you would like to exit the program type \'exit\' or \'quit\'"
     puts "------------------------------------"
@@ -100,6 +101,9 @@
           break        
         elsif input == '10'
           add_game
+          break
+        elsif input == '11'
+          average_game_review
           break
         elsif input.downcase == 'exit' || input.downcase == 'quit'
           break
@@ -178,7 +182,7 @@
     choices
   end
 
-  
+  #===========HELPER FUNCTIONS============
   def find_game_by_name(game_name)
     @game = Game.find_by(name: game_name)
   end
@@ -187,6 +191,7 @@
   def find_player(name)
     @player = Player.find_by(name: name)
   end
+  #=======================================
 
   #3
   def write_review
@@ -498,7 +503,63 @@
     end
   end
 
-   def closing
+#11
+  def average_game_review
+    while true
+      puts "#================================#"
+      puts "Find the average review of a game"
+      puts "#================================#"
+      new_screen(4)
+
+      puts "#================================#"
+      puts "Please enter the name of the game"
+      puts "#================================#"
+      game_name_input = gets.chomp
+      #find_game_by_name(game_name_input)
+      @game = Game.find_by(name: game_name_input)
+
+
+      if @game == nil
+        new_screen(64)
+        puts "#==========================================#"
+        puts "**No game found in database by that name!**"
+        puts "#==========================================#"
+        new_screen(20)
+        choices
+        break
+
+
+      else 
+        avg = []
+        all_game_reviews = Review.where(game_id: @game.id)
+        #****Currently if this code is active every review score is nil****
+        # if all_game_reviews.where(score: nil)
+        #   new_screen(64)
+        #   puts "#===========================#"
+        #   puts "No reviews for #{@game.name}"
+        #   puts "#===========================#"
+        #   new_screen(20)
+        #   choices
+        #   break
+        # else
+        #****Will just return NaN now if there is no reviews for a game****
+          all_game_reviews.each do |r|
+            avg << r.score
+          end
+          average_score = (avg.reduce(:+).to_f / avg.size).round(1)
+          new_screen(5)
+          puts "#=======================================================#"
+          puts "The average review for #{@game.name} is #{average_score}"
+          puts "#=======================================================#"
+          new_screen(20)
+        #  end
+      end
+      choices
+      break
+    end
+  end
+
+  def closing
 
     #If you re-add the commented lines below in the closing methods the star wars theme title crawl theme will play and the credits will scroll.
     new_screen(64)
