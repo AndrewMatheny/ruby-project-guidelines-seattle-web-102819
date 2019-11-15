@@ -15,6 +15,15 @@ The following methods are included
     10. Adding a new game to the database
     11. Finding average review for a game
 
+ #INSTALL INSTRUCTIONS#
+
+ In the command terminal with the project folder open run
+ "rake db:migrate"
+ then
+ "rake db:seed"
+
+ Then enter "ruby bin/run.rb" to run the program.
+
 *Acknowledgements*
 
 Sounds added using the Ruby2D gem
