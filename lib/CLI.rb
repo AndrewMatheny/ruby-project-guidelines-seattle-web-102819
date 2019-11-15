@@ -103,9 +103,12 @@
           puts 'Thank you for using GameFinder!'
           puts "-------------------------------"
         else
+          new_screen(64)
           puts "#=================================================================#"
           puts "Command not found - Please pick from the list or type exit to quit"
           puts "#=================================================================#"
+          choices
+          break
         end
       end
   end
@@ -505,7 +508,7 @@
     puts "                                                                                                                     /\\___/"
     puts "                                                                                                                     \\/__/ "
     
-   # scrolling(64)
+  #scrolling(64)
 
    end
 
