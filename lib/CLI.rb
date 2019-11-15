@@ -506,6 +506,7 @@
 #11
   def average_game_review
     while true
+      new_screen(64)
       puts "#================================#"
       puts "Find the average review of a game"
       puts "#================================#"
@@ -547,7 +548,7 @@
             avg << r.score
           end
           average_score = (avg.reduce(:+).to_f / avg.size).round(1)
-          new_screen(5)
+          new_screen(64)
           puts "#=======================================================#"
           puts "The average review for #{@game.name} is #{average_score}"
           puts "#=======================================================#"
