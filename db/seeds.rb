@@ -18,6 +18,7 @@ golf_with_friends = Game.create(name: "Golf With Friends", genre: "Sports")
 modern_warfare_2 = Game.create(name: "Call of Duty Modern Warfare 2", genre: "Action")
 metro_exodus = Game.create(name: "Metro Exodus", genre: "Action")
 
+
 Review.create(player_id: drew.id, game_id: mass_effect_3.id, score: 9, description: "Fantastic Story")
 Review.create(player_id: drew.id, game_id: the_last_of_us.id, score: 10, description: "Unbelievable")
 Review.create(player_id: drew.id, game_id: dota_2.id, score: 5, description: "Not my kind of game")

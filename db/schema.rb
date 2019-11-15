@@ -15,20 +15,19 @@ ActiveRecord::Schema.define(version: 1) do
   create_table "games", force: :cascade do |t|
     t.string "name"
     t.string "genre"
-    t.float  "average_review"
   end
 
   create_table "players", force: :cascade do |t|
-    t.string  "name"
+    t.string "name"
     t.integer "age"
-    t.string  "favorite_genre"
+    t.string "favorite_genre"
   end
 
   create_table "reviews", force: :cascade do |t|
     t.integer "player_id"
     t.integer "game_id"
     t.integer "score"
-    t.string  "description"
+    t.string "description"
   end
 
 end
