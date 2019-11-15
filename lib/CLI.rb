@@ -533,17 +533,15 @@
       else 
         avg = []
         all_game_reviews = Review.where(game_id: @game.id)
-        #****Currently if this code is active every review score is nil****
-        # if all_game_reviews.where(score: nil)
-        #   new_screen(64)
-        #   puts "#===========================#"
-        #   puts "No reviews for #{@game.name}"
-        #   puts "#===========================#"
-        #   new_screen(20)
-        #   choices
-        #   break
-        # else
-        #****Will just return NaN now if there is no reviews for a game****
+        if all_game_reviews.empty?
+          new_screen(64)
+          puts "#===========================#"
+          puts "No reviews for #{@game.name}"
+          puts "#===========================#"
+          new_screen(20)
+          choices
+          break
+        else
           all_game_reviews.each do |r|
             avg << r.score
           end
@@ -553,7 +551,7 @@
           puts "The average review for #{@game.name} is #{average_score}"
           puts "#=======================================================#"
           new_screen(20)
-        #  end
+        end
       end
       choices
       break
